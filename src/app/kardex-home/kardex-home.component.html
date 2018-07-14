@@ -1,0 +1,19 @@
+<form #formReg="ngForm" (ngSubmit)="onSubmit(formReg.value)">
+<h1 style="text-align:center">
+        Kardex Hulk Store
+  </h1>     
+  <div style="align-content: center">
+        <button pButton type="submit" label="Consultar Items"></button>
+        <button pButton type="button" label="Adicionar Item" (click)="adicionarProducto()" ></button>
+  </div>               
+  <div *ngIf="!ListItems?.length == 0">
+        <p-dataTable [value]="ListItems" [rows]="10" [paginator]="true" *ngIf="!ListItems?.length == 0">                      
+                     <p-column field="nombre" header="Nombre Producto" sortable="true"></p-column>
+                     <p-column field="cantidad" header="Cantidad Producto" sortable="true"></p-column>                      
+        </p-dataTable>            
+  </div>
+  </form>
+  <p-dialog header="Adicionar Producto"  *ngIf="verAdicionarProducto" [(visible)]="verAdicionarProducto" [contentStyle]="{'height': '220px'}" [closable]="true" 
+  [closeOnEscape]="true"  modal="modal" width="600"  modal="true" [responsive]="true">
+        <app-add-product (closePopup)="close($event)" ></app-add-product>
+  </p-dialog>

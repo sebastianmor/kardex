@@ -1,0 +1,28 @@
+       
+ 
+      <div style="align-content:center">
+        <h1 style="text-align:center">
+          Adicionar Producto
+        </h1>      
+      <table>
+            <tr>
+                <td>
+                    <label>Nombre Producto:</label>
+                </td>
+                <td>
+                    <input pInputText type="text" name="nombre" #nombre="ngModel" name="nombre" pattern="([A-Za-zñáéíóúüÑÁÉÍÓÚÜ]|[ ])*"
+                    [(ngModel)]="producto.nombre" />
+                </td>
+                <td>
+                    <label>Cantidad:</label>
+                </td>
+                <td>
+                    <input pInputText type="text" name="cantidad" #nombre="ngModel" name="cantidad" pattern="\d{1,10}"
+                    [(ngModel)]="producto.cantidad" />
+                </td>
+            </tr>         
+        </table>     
+        <div style="align-content: center">  
+         <button pButton type="button" label="Adicionar Produto" (click)="guardarProducto()"></button>  
+         <button pButton type="button" label="Cerrar" (click)="cerrarPopup()"></button>                   
+       </div> 
