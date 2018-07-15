@@ -1,32 +1,41 @@
 import { Component, OnInit , Output, EventEmitter} from '@angular/core';
 import { Producto } from '../model/Producto';
-import {Message} from 'primeng/components/common/api';
-import {MessageService} from 'primeng/components/common/messageservice';
+import { Message} from 'primeng/primeng';
+import { KardexService} from '../service/kardex-service.service';  
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.css'],
-  providers: [MessageService]
+  styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit {
 
-  public msgs: Message[] = [];
+  public msgs: Message[];
   public producto:Producto;
 
   @Output ()
   closePopup: EventEmitter<boolean> = new EventEmitter<boolean>(); 
   
-  constructor() { }
+  constructor(private _kardexService:KardexService) { }
 
 
   ngOnInit() {
     this.producto = new Producto();
-    
+    this.producto.fecha = new Date();
+    this.msgs=[];
   }
 
   guardarProducto(){
-    console.log('guardarProducto');
+     console.log('guardarProducto');  
+     this._kardexService.crearProducto(this.producto).then
+     (res=>{
+        console.log(res);
+        this.success('se crearon los datos con exito');
+     }).catch(err=>{ 
+      console.log(err);
+      this.error(err);
+    });
+    
   }
 
   cerrarPopup(){

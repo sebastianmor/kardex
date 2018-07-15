@@ -1,19 +1,73 @@
 <form #formReg="ngForm" (ngSubmit)="onSubmit(formReg.value)">
-<h1 style="text-align:center">
+  <h1 style="text-align:center">
         Kardex Hulk Store
-  </h1>     
-  <div style="align-content: center">
-        <button pButton type="submit" label="Consultar Items"></button>
-        <button pButton type="button" label="Adicionar Item" (click)="adicionarProducto()" ></button>
-  </div>               
+  </h1>   
+  <h2 style="text-align:center">
+       NIT:123456789
+  </h2>
+  
+               
   <div *ngIf="!ListItems?.length == 0">
-        <p-dataTable [value]="ListItems" [rows]="10" [paginator]="true" *ngIf="!ListItems?.length == 0">                      
-                     <p-column field="nombre" header="Nombre Producto" sortable="true"></p-column>
-                     <p-column field="cantidad" header="Cantidad Producto" sortable="true"></p-column>                      
+        <p-dataTable [value]="ListItems" [rows]="10" [editable]="true" [paginator]="true" *ngIf="!ListItems?.length == 0">
+                    <p-column field="id" header="Consecutivo" sortable="true"></p-column> 
+                    <p-column field="fecha" header="Fecha" sortable="true">
+                        <ng-template let-col let-row="rowData" pTemplate="body">
+                         {{row[col.field]|date:'dd/MM/yyyy'}}
+                        </ng-template>
+                     </p-column>
+                     <p-column field="detalle" header="Detalle" sortable="true"></p-column>                     
+                     <p-column field="cantidadEntrada"  [editable]="true"header="Unidades Entrada (und)" sortable="true">
+                     </p-column>                      
+                     <p-column field="valorEntrada"  [editable]="true" header="Costo Unitario Entrada" sortable="true">
+                              <ng-template let-col let-rowSel="rowData" pTemplate="body">
+                                          ${{rowSel[col.field] | currency:'COP':'symbol':'2.2-4'}} 
+                              </ng-template>
+                     </p-column>
+                     <p-column field="totalEntrada" header="Costo Total Entrada" sortable="true">   
+                              <ng-template let-col let-rowSel="rowData" pTemplate="body">
+                                          ${{rowSel[col.field] | currency:'COP':'symbol':'2.2-4'}} 
+                              </ng-template>
+                     </p-column>
+                     <p-column field="cantidadSalida" [editable]="true" header="Unidades Salida (und)" sortable="true"></p-column>                      
+                     <p-column field="valorSalida"  [editable]="true" header="Costo Unitario Salida" sortable="true">
+                              <ng-template let-col let-rowSel="rowData" pTemplate="body">
+                                          ${{rowSel[col.field] | currency:'COP':'symbol':'2.2-4'}} 
+                              </ng-template>      
+                     </p-column>
+                     <p-column field="totalSalida" header="Costo total Salida" sortable="true"> 
+                              <ng-template let-col let-rowSel="rowData" pTemplate="body">   
+                                           ${{rowSel[col.field] | currency:'COP':'symbol':'2.2-4'}}   
+                              </ng-template>                   
+                     </p-column>
+                     <p-column field="cantidadSaldo" [editable]="true" header="Unidades Saldo (und)" sortable="true"></p-column>                                          
+                     <p-column field="totalSaldo" [editable]="true" header="Total valor Saldo" sortable="true">
+                              <ng-template let-col let-rowSel="rowData" pTemplate="body">
+                                          ${{rowSel[col.field] | currency:'COP':'symbol':'2.2-4'}} 
+                              </ng-template>      
+                     </p-column>
+                     <p-column styleClass="col-button" header="Opciones" >
+                              <ng-template let-rowSel="rowData" pTemplate="body">
+                                  <button type="button" pButton [disabled]="rowSel.totalSaldo==0"   (click)="guardarCambios(rowSel)" icon="fa-save" title="Guardar"></button>
+                                  <button type="button" pButton [disabled]="rowSel.totalSaldo==0"   (click)="confirmar(rowSel)" icon="fa-remove" title="Eliminar"></button>                                                              
+                              </ng-template>                
+                    </p-column> 
+
         </p-dataTable>            
   </div>
+  <br>
+  <br>
+  <div style="text-align:center">
+      <button pButton type="submit" label="Consultar Items"></button>
+      <button pButton type="button" label="Registrar Movimiento" (click)="adicionarProducto()" ></button>
+  </div> 
   </form>
-  <p-dialog header="Adicionar Producto"  *ngIf="verAdicionarProducto" [(visible)]="verAdicionarProducto" [contentStyle]="{'height': '220px'}" [closable]="true" 
+  <p-dialog header="Entrada Movimiento"  *ngIf="verAdicionarProducto" [(visible)]="verAdicionarProducto" [contentStyle]="{'height': '220px'}" [closable]="true" 
   [closeOnEscape]="true"  modal="modal" width="600"  modal="true" [responsive]="true">
         <app-add-product (closePopup)="close($event)" ></app-add-product>
   </p-dialog>
+  <p-confirmDialog #cd>
+      <p-footer>
+          <button type="button" pButton icon="fa-check" label="Aceptar" (click)="cd.accept()"></button>
+          <button type="button" pButton icon="fa-close" label="Cancelar" (click)="cd.reject()"></button>
+      </p-footer>
+  </p-confirmDialog>

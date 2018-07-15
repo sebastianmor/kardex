@@ -1,28 +1,80 @@
        
  
-      <div style="align-content:center">
-        <h1 style="text-align:center">
-          Adicionar Producto
-        </h1>      
-      <table>
+      <div style="align-content:center">            
+      <table>            
             <tr>
                 <td>
-                    <label>Nombre Producto:</label>
+                    <label>Detalle:</label>
                 </td>
                 <td>
-                    <input pInputText type="text" name="nombre" #nombre="ngModel" name="nombre" pattern="([A-Za-zñáéíóúüÑÁÉÍÓÚÜ]|[ ])*"
-                    [(ngModel)]="producto.nombre" />
+                    <input pInputText type="text" name="detalle" #detalle="ngModel" name="detalle" pattern="([A-Za-zñáéíóúüÑÁÉÍÓÚÜ]|[ ])*"
+                    [(ngModel)]="producto.detalle" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Unidades Entrada:</label>
                 </td>
                 <td>
-                    <label>Cantidad:</label>
+                    <input pInputText type="text" name="cantidadEntrada" #cantidadEntrada="ngModel" name="cantidadEntrada" pattern="\d{1,10}"
+                    [(ngModel)]="producto.cantidadEntrada" />
+                </td>
+            </tr>  
+            <tr>
+                <td>
+                    <label>Costo Unitario Entrada:</label>
                 </td>
                 <td>
-                    <input pInputText type="text" name="cantidad" #nombre="ngModel" name="cantidad" pattern="\d{1,10}"
-                    [(ngModel)]="producto.cantidad" />
+                    <input pInputText type="text" name="valorEntrada" #valorEntrada="ngModel" name="valorEntrada" pattern="\d{1,10}"
+                    [(ngModel)]="producto.valorEntrada" />
                 </td>
-            </tr>         
+            </tr>  
+            <tr>
+                <td>
+                    <label>Costo Total Entrada:</label>
+                </td>
+                <td>
+                    <input pInputText type="text" name="totalEntrada" #totalEntrada="ngModel" name="totalEntrada" pattern="\d{1,10}"
+                    [(ngModel)]="producto.totalEntrada"  />
+                </td>
+            </tr> 
+            <tr>
+                <td>
+                    <label>Unidades Salida:</label>
+                </td>
+                <td>
+                    <input pInputText type="text" name="cantidadSalida" #cantidadSalida="ngModel" name="cantidadSalida" pattern="\d{1,10}"
+                    [(ngModel)]="producto.cantidadSalida" />
+                </td>
+            </tr>  
+            <tr>
+                <td>
+                    <label>Precio Unitario Salida:</label>
+                </td>
+                <td>
+                    <input pInputText type="text" name="valorSalida" #valorEntrada="ngModel" name="valorSalida" pattern="\d{1,10}"
+                    [(ngModel)]="producto.valorSalida" />
+                </td>
+            </tr>  
+            <tr>
+                <td>
+                    <label>Valor Salida:</label>
+                </td>
+                <td>
+                    <input pInputText type="text" name="totalSalida" #totalSalida="ngModel" name="totalSalida" pattern="\d{1,10}"
+                    [(ngModel)]="producto.totalSalida" />
+                </td>
+            </tr> 
+            <tr>
+                <td>
+                    <label>Fecha:</label>
+                </td>
+                <td>
+                    <p-calendar name="fecha"  [disabled]="true"  [(ngModel)]="producto.fecha" showButtonBar="true"  dateFormat="dd/mm/yy"></p-calendar>                
+                </td>
+            </tr>        
         </table>     
-        <div style="align-content: center">  
-         <button pButton type="button" label="Adicionar Produto" (click)="guardarProducto()"></button>  
+        <div style="text-align:center">  
+         <button pButton type="button" label="Guardar" (click)="guardarProducto()"></button>  
          <button pButton type="button" label="Cerrar" (click)="cerrarPopup()"></button>                   
        </div> 

@@ -1,0 +1,47 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "productos": [
+    {
+      "id": 1,
+      "detalle": "mov1",
+      "cantidadEntrada": 1,
+      "valorEntrada": 10,
+      "totalEntrada": 10,
+      "cantidadSalida": 0,
+      "valorSalida": 0,
+      "totalSalida": 0,
+      "cantidadSaldo": 0,
+      "valorSaldo": 0,
+      "totalSaldo": 0
+    },
+    {
+      "id": 3,
+      "detalle": "mov3",
+      "cantidadEntrada": 1,
+      "valorEntrada": 1,
+      "totalEntrada": 1,
+      "cantidadSalida": 0,
+      "valorSalida": 0,
+      "totalSalida": 0,
+      "cantidadSaldo": 0,
+      "valorSaldo": 0,
+      "totalSaldo": 0
+    }
+  ]
+}
